@@ -25,10 +25,10 @@ I use the adafruit SCD30 module which is based on the Sensirion SCD30 Sensor. It
 I used Thonny mainly to load firmware onto the pico. But even though Thonny has worse IDE features compared to VScode, I still wrote all of the code for the pico in the Thonny editor. Aswell as using the build in package manager to load libraries on to the pico automatically. 
 
 ### Putting everything together
-![[Pictures/picow-pinout (2).PNG]]
+[[Pictures/picow-pinout (2).PNG]]
 Connecting the SCD30 module to the Pico W is very easy. Simply place the pico and SCD30 on the breadboard and connect the one of the GND pins on the pico to the GND pin on the SCD30. Then connect either VSYS,VBUS or 3v3(OUT) to the VIN pin on the SCD30. If you do like I did in the Fritzing circuit you bypass the internal voltage regulator so you can only plug in from 3v3(OUT) on the pico. Lastly connect I2C0 SCL on the pico to the SCL pin on the SCD30 and likewise fro the I2C0 SDA to the SDA pin on SCD30.
 
-![[Pictures/Circuit.png]]
+[[Pictures/Circuit.png]]
 ### Platform
 
 I send the data collected from the SCD-30 to my Home Assistant server which I had already set up. Home assistant is an open source smart home platform where you can connect different types of smart home platforms to make them work together. In my case it is running locally on a raspberry pi4 under docker, aswell as a MQTT broker. I won't go into how you set those up as there are way better guides on the [Home assistant wiki](https://www.home-assistant.io/docs/) for that.
@@ -131,12 +131,12 @@ Home assistant is simply listening to the topics being sent on the MQTT broker.
 
 The Pico W is connected to my Homeassistant server though Wifi, since I was going to be using the sensor at home. MQTT was used to make it easier to interface with home assistant and the data is being transmitted about every 30 seconds, I run the pico of a phone charger so I haven't really cared about power efficiency.
 ### Presenting the data
-![[Pictures/Dashboard_CO2.png]]
+[[Pictures/Dashboard_CO2.png]]
 All data is stored on my Home Assistant server, untill I shut it down (since I have sort of messed up my permanent storage.) The picture above shows how the data is being displayed in my Home Assistant dashboard using the Gauge card. Data graphs can be shown in the history page for the sensor
-![[Pictures/HASSgraph.png]]
+[[Pictures/HASSgraph.png]]
 The straight allmost squarewave in the beginning is where the pico crashed. after about 20:12 is where good measurements are started. and you can see that the PPM value is gradually increasing since i closed the window at about 20:51.
 
 ### Finalizing the design
-![[Pictures/Final sensor.jpg]]
+[[Pictures/Final sensor.jpg]]
 My sensor ended up staying on the breadboard, I could go to my local makerspace and make a circuitboard to mount it all on and 3D print a case, that might be something for the future when I need the breadboard for other things. The measurements are interesting. I find that the CO2 values are lower than i expected, but also very interesting how fast it actually increases. Sadly the graph pictures I have in this tutorial does not show that long time scales. I ran the sensor at the end of may for quite some time however some instability issues that I think i solved using manual garbage collection made it too anoying to keep it running. And sadly it seems that my home assistant server restarted since then.
 
