@@ -25,7 +25,7 @@ I use the adafruit SCD30 module which is based on the Sensirion SCD30 Sensor. It
 I used Thonny mainly to load firmware onto the pico. But even though Thonny has worse IDE features compared to VScode, I still wrote all of the code for the pico in the Thonny editor. Aswell as using the build in package manager to load libraries on to the pico automatically. 
 
 ### Putting everything together
-![](Pictures/picow-pinout.PNG)]
+![](Pictures/picow-pinout.png)
 Connecting the SCD30 module to the Pico W is very easy. Simply place the pico and SCD30 on the breadboard and connect the one of the GND pins on the pico to the GND pin on the SCD30. Then connect either VSYS,VBUS or 3v3(OUT) to the VIN pin on the SCD30. If you do like I did in the Fritzing circuit you bypass the internal voltage regulator so you can only plug in from 3v3(OUT) on the pico. Lastly connect I2C0 SCL on the pico to the SCL pin on the SCD30 and likewise fro the I2C0 SDA to the SDA pin on SCD30.
 
 ![](Pictures/Circuit.png)!
@@ -133,7 +133,7 @@ The Pico W is connected to my Homeassistant server though Wifi, since I was goin
 ### Presenting the data
 ![](Pictures/Dashboard_CO2.png)
 All data is stored on my Home Assistant server, untill I shut it down (since I have sort of messed up my permanent storage.) The picture above shows how the data is being displayed in my Home Assistant dashboard using the Gauge card. Data graphs can be shown in the history page for the sensor
-![Pictures/HASSgraph.png]
+![](Pictures/HASSgraph.png)
 The straight allmost squarewave in the beginning is where the pico crashed. after about 20:12 is where good measurements are started. and you can see that the PPM value is gradually increasing since i closed the window at about 20:51.
 
 ### Finalizing the design
