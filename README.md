@@ -16,7 +16,7 @@ Spending time by my computer, sitting at my desk has it's drawbacks, one of whic
 |Breadboard|Electrokit|A board with interconnects that makes it easier to connect socketed devices together |49kr (400pins)|
 |Jumper wires|Electrokit|---|49kr / 40 pieces|
 |USB type micro B Cable|Electrokit|---|16kr / 15cm
-|
+
 
 I use the adafruit SCD30 module which is based on the Sensirion SCD30 Sensor. It measures actual CO2 concetration compared to other sensors which only estimates from VOC (volotile organic compounds) - measurements. The SCD30 also measures temperature and humidity. It can either be manually calibrated or use a autocalibration feature. I use the manual calibration as it requires to be run continiously and be exposed to fresh air regulary. I have not been able to keep my code stable enough and since i don't have a battery it makes it somewhat anoying to pull over to my window from time to time. I simply keep the sensor by the window when i start it up and during startup the sensor will set it's calibration to 400PPM (I assume that the outside air has a CO2 concentration of 400PPM)
 
@@ -36,7 +36,7 @@ Id recommend that you follow Home assistants advice and run HASSOS on a raspberr
 
 ### The code
 
-Import core functions of your code here, and don’t forget to explain what you have done! Do not put too much code here, focus on the core functionalities. Have you done a specific function that does a calculation, or are you using clever function for sending data on two networks? Or, are you checking if the value is reasonable etc. Explain what you have done, including the setup of the network, wireless, libraries and all that is needed to understand.
+The full code can be found in the repo.
 
 I mainly followed the official Raspberry pi Pico W [guide](#https://projects.raspberrypi.org/en/projects/get-started-pico-w ) on how to setup networking  utilizing the Pico-zero library you get the machine and network modules.
 ```
@@ -57,11 +57,12 @@ except KeyboardInterrupt:
 ```
 
 Above is the code needed to connect your pico w to your home network. I put my network credentials and other "secret" information into another python file that i call secrets.
-In secrets.py :
+In secrets.py:
 ```
 ssid ='insert wifi name'
 password 'insert wifi password'
 ```
+
 To connect to the MQTT broker I use the [umqtt.simple library](https://pypi.org/project/micropython-umqtt.simple/) 
 ```
 client_id = 'SCD30'
@@ -81,8 +82,9 @@ try:
 except OSError as e:
     reconnect()
 ```
+If the reconnect fails it will restart the pico and try again. I print some text as a sanity check.
 
-And finally everytime the SCD30 is ready to send data I reformat the data into json using the [json library](https://docs.micropython.org/en/latest/library/json.html) to make it easier to use in Home Assistant and publish it to the MQTT broker
+And finally everytime the SCD30 is ready to send data I reformat the data into json using the [json library](https://docs.micropython.org/en/latest/library/json.html) to make it easier to use in Home Assistant and publish it to the MQTT broker. If the pico is faster it waits for 200ms.
 ```
 while True:
     led.on()
@@ -99,6 +101,8 @@ while True:
 ```
 As a sanity check i blink the pico W led when data is being transmitted.
 I also use manual garbage collection to prevent the picos memory filling up. (this can be improved.)
+
+#### Home Assistant:
 
 HASS configuration.yaml:
 ```
@@ -124,6 +128,7 @@ In home assistant adding sensors from an MQTT broker has to be done manually in 
 Home assistant is simply listening to the topics being sent on the MQTT broker.
 
 ### Transmitting the data / connectivity
+
 The Pico W is connected to my Homeassistant server though Wifi, since I was going to be using the sensor at home. MQTT was used to make it easier to interface with home assistant and the data is being transmitted about every 30 seconds, I run the pico of a phone charger so I haven't really cared about power efficiency.
 ### Presenting the data
 ![[Dashboard_CO2.png]]
