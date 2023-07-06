@@ -40,6 +40,8 @@ The full code can be found in the repo.
 
 I mainly followed the official Raspberry pi Pico W [guide](#https://projects.raspberrypi.org/en/projects/get-started-pico-w ) on how to setup networking  utilizing the Pico-zero library you get the machine and network modules.
 ```
+python
+#WiFi connection
 def connect():
     #Connect to WLAN
     wlan = network.WLAN(network.STA_IF)
