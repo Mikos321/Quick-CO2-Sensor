@@ -58,13 +58,13 @@ except KeyboardInterrupt:
 
 Above is the code needed to connect your pico w to your home network. I put my network credentials and other "secret" information into another python file that i call secrets.
 In secrets.py:
-```
+```python
 ssid ='insert wifi name'
 password 'insert wifi password'
 ```
 
 To connect to the MQTT broker I use the [umqtt.simple library](https://pypi.org/project/micropython-umqtt.simple/) 
-```
+```python
 client_id = 'SCD30'
 topic_pub = b'SCD30'
 
@@ -85,7 +85,7 @@ except OSError as e:
 If the reconnect fails it will restart the pico and try again. I print some text as a sanity check.
 
 And finally everytime the SCD30 is ready to send data I reformat the data into json using the [json library](https://docs.micropython.org/en/latest/library/json.html) to make it easier to use in Home Assistant and publish it to the MQTT broker. If the pico is faster it waits for 200ms.
-```
+```python
 while True:
     led.on()
     while scd30.get_status_ready() != 1:
@@ -105,7 +105,7 @@ I also use manual garbage collection to prevent the picos memory filling up. (th
 #### Home Assistant:
 
 HASS configuration.yaml:
-```
+```yaml
 mqtt:
   sensor:
     - name: "CO2"
