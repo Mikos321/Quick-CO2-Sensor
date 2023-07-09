@@ -4,7 +4,7 @@
 
 ## Objective
 
-Spending time by my computer, sitting at my desk has it's drawbacks, one of which is that unless my window is open there seems to be somewhat low airflow around the desk. I wondered if Carbondioxide (CO2) would build up by my desk and if so, it would be handy to have a notification telling me to open my window. Utilizing my already setup Home assistant server and MQTT broker I build a quick wifi connected CO2 meter using a PICO-W and a Adafruit SCD-30 module. Assuming you have a Home assistant instance running, I'd say this project would take about an hour to set up.
+Spending time by my computer, sitting at my desk has it's drawbacks, one of which is that unless my window is open there seems to be somewhat low airflow around the desk. I wondered if Carbondioxide (CO2) would build up by my desk and if so, it would be handy to have a notification telling me to open my window. Utilizing my already setup Home assistant server and MQTT broker I build a quick wifi connected CO2 meter using a PICO-W and a Adafruit SCD-30 module. Assuming you have a Home assistant instance running, I'd say this project would take about an hour to set up. Assuming that you allready have a Home Assistant + mosquitto setup this project should not take any more than 2 hours to complete.
 
 
 ### Material
